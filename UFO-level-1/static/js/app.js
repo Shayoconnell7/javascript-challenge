@@ -10,7 +10,7 @@ var tbody = d3.select("tbody");
 
 console.log(tableData)
 
-data.forEach(function(sighting) {
+tableData.forEach(function(sighting) {
     console.log(sighting);
     var row = tbody.append("tr");
 
@@ -22,12 +22,22 @@ data.forEach(function(sighting) {
   });
 
 
-
 // using a form to filter by date
-// var form = d3.select("#form")
+var form = d3.select("#form");
+var button = d3.select("button");
 
-// form.on("submit", makeTable())
+form.on("submit", filterTable);
+button.on("submit", filterTable);
 
-// function makeTable() {
+function filterTable() {
+    d3.event.preventDefault();
 
-// }
+    var inputElement = d3.select("#datetime");
+
+    var inputValue = inputElement.property("value");
+
+    console.log(inputValue);
+    
+    var filteredData = tableData.filter(instance => instance.datetime === inputValue);
+    console.log(filteredData);
+}
