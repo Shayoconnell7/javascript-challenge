@@ -40,4 +40,30 @@ function filterTable() {
     
     var filteredData = tableData.filter(instance => instance.datetime === inputValue);
     console.log(filteredData);
+
+    d3.select('tbody').html("")
+
+    filteredData.forEach(function(sighting) {
+        var row = tbody.append("tr");
+    
+        Object.entries(sighting).forEach(function([key, value]) {
+            var cell = row.append("td");
+            cell.text(value);
+          });
+      });
 }
+
+
+// var filteredData = tableData.filter(filterTable) 
+
+// filteredData.forEach(function(sighting) {
+//     console.log(sighting);
+//     var row = tbody.append("tr");
+
+//     Object.entries(sighting).forEach(function([key, value]) {
+//         console.log(key, value);
+//         var cell = row.append("td");
+//         cell.text(value);
+//       });
+//   });
+// var playersOnTeam = roster.filter(madeCut);
