@@ -31,16 +31,169 @@ button.on("click", filterTable);
 function filterTable() {
     d3.event.preventDefault();
 
-    var filteredbyDate = tableData.filter(dateFilter);
-    console.log(filteredbyDate);
-    var filteredbyShape = filteredbyDate.filter(shapeFilter);
-    console.log(filteredbyShape);
-    var filteredbyCountry = filteredbyShape.filter(countryFilter);
-    console.log(filteredbyCountry);
-    var filteredbyState = filteredbyCountry.filter(stateFilter);
-    console.log(filteredbyState);
-    var filteredData = filteredbyState.filter(cityFilter);
-    console.log(filteredData);
+    var filteredData = tableData;
+    
+    var inputElement1 = d3.select("#datetime");
+    var inputValue1 = inputElement1.property("value");
+
+    var inputElement2 = d3.select("#shape");  
+    var inputValue2 = inputElement2.property("value");
+
+    var dropdown1 = d3.select("#country");
+    var dropdownValue1 = dropdown1.property("value");
+
+    var dropdown2 = d3.select("#state");  
+    var dropdownValue2 = dropdown2.property("value");
+
+    var inputElement3 = d3.select("#city");  
+    var inputValue3 = inputElement3.property("value");
+
+    switch (dateFilter(inputValue1)) {
+        case "":
+            console.log("no parameter entered for date");
+        break;
+        default:
+            filteredData = filteredData.filter(dateFilter);
+    };
+    switch (shapeFilter(inputValue2)) {
+        case "":
+            console.log("no parameter entered for shape");
+        break;
+        default:
+            filteredData = filteredData.filter(shapeFilter);
+    };
+    switch (countryFilter(dropdownValue1)) {
+        case "":
+            console.log("no parameter entered for country");
+        break;
+        default:
+            filteredData = filteredData.filter(countryFilter);
+    };
+    switch (stateFilter(dropdownValue2)) {
+        case "":
+            console.log("no parameter entered for state");
+        break;
+        default:
+            filteredData = filteredData.filter(stateFilter);
+    };
+    switch (cityFilter(inputValue3)) {
+        case "":
+            console.log("no parameter entered for city");      
+        break;
+        default:
+            filteredData = filteredData.filter(cityFilter);           
+    };
+
+
+
+    // if (inputValue1 === true) {
+    //     filteredData = filteredData.filter(dateFilter);
+    //     console.log(filteredData);
+
+    //     if (inputValue2 === true) {
+    //         var filteredData = filteredData.filter(shapeFilter);
+    //         console.log(filteredData);
+
+    //         if (dropdownValue1 === true) {
+    //             var filteredData = filteredData.filter(countryFilter);
+    //             console.log(filteredData)
+
+    //             if (dropdownValue2 === true) {
+    //                 var filteredData = filteredData.filter(stateFilter);
+    //                 console.log(filteredData);
+
+    //                 if (inputValue3 === true) {
+    //                     var filteredData = filteredData.filter(cityFilter);
+    //                     console.log(filteredData);
+    //                 };
+
+    //             } else if (inputValue3 === true) {
+    //                 var filteredData = filteredData.filter(cityFilter);
+    //                 console.log(filteredData);
+    //             };
+
+    //         } else if (dropdownValue2 === true) {
+    //             var filteredData = filteredData.filter(stateFilter);
+    //             console.log(filteredData);
+
+    //             if (inputValue3 === true) {
+    //                 var filteredData = filteredData.filter(cityFilter);
+    //                 console.log(filteredData);
+    //             };
+    //         } else if (inputValue3 === true) {
+    //             var filteredData = filteredData.filter(cityFilter);
+    //             console.log(filteredData);
+    //         };
+
+    //     } else if (inputValue2 === true) {
+    //         var filteredData = filteredData.filter(shapeFilter);
+    //         console.log(filteredData);
+
+    //         if (dropdownValue1 === true) {
+    //             var filteredData = filteredData.filter(countryFilter);
+    //             console.log(filteredData)
+
+    //             if (dropdownValue2 === true) {
+    //                 var filteredData = filteredData.filter(stateFilter);
+    //                 console.log(filteredData);
+
+    //                 if (inputValue3 === true) {
+    //                     var filteredData = filteredData.filter(cityFilter);
+    //                     console.log(filteredData);
+    //                 };
+
+    //             } else if (inputValue3 === true) {
+    //                 var filteredData = filteredData.filter(cityFilter);
+    //                 console.log(filteredData);
+    //             };
+    //         } else if (dropdownValue2 === true) {
+    //             var filteredData = filteredData.filter(stateFilter);
+    //             console.log(filteredData);
+
+    //             if (inputValue3 === true) {
+    //                 var filteredData = filteredData.filter(cityFilter);
+    //                 console.log(filteredData);
+
+    //             };
+    //         } else if (inputValue3 === true) {
+    //             var filteredData = filteredData.filter(cityFilter);
+    //             console.log(filteredData);
+    //         };
+    //     };    
+    // }; 
+
+    
+    // {if (inputValue2 === true) {
+    //     var filteredData = filteredData.filter(shapeFilter);
+    //     console.log(filteredData);
+    // } else {filteredData = filteredData;
+    // };
+    // };
+
+    
+    // {if (dropdownValue1 === true) {
+    //     var filteredData = filteredData.filter(countryFilter);
+    //     console.log(filteredData);
+    // } else {filteredData = filteredData;
+    // };
+    // };
+
+    
+    // {if (dropdownValue2 === true) {
+    //     var filteredData = filteredData.filter(stateFilter);
+    //     console.log(filteredData);
+    // } else {filteredData = filteredData;
+    // };
+    // };
+
+    
+    // {if (inputValue3 === true) {
+    //     var filteredData = filteredData.filter(cityFilter);
+    // console.log(filteredData);
+    // } else {filteredData = filteredData;
+    // };
+    // };
+    
     // reset table to be empty
     d3.select('tbody').html("")
 
@@ -79,7 +232,6 @@ function shapeFilter(row){
 
 function countryFilter(row){
     var dropdown1 = d3.select("#country");
-// Assign the value of the dropdown menu option to a variable
     var dropdownValue1 = dropdown1.property("value");
     console.log(dropdownValue1);
     return row.country === dropdownValue1;
@@ -99,4 +251,3 @@ function cityFilter(row){
     console.log(inputValue3);
     return row.city === inputValue3;
 };
-
