@@ -2,7 +2,6 @@
 var tableData = data;
 
 
-
 // Making a table
 
 var tbody = d3.select("tbody");
@@ -26,7 +25,7 @@ var form = d3.select("#form");
 var button = d3.select("button");
 
 form.on("submit", filterTable);
-button.on("submit", filterTable);
+button.on("click", filterTable);
 
 function filterTable() {
     d3.event.preventDefault();
